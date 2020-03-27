@@ -3,12 +3,12 @@ Locally:
 1. Create a new virtual environment (`python -m venv env`)
 2. Activate the environment (`.\env\Scripts\activate.bat`)
 3. Install known dependencies (e.g. `pip install --no-deps psychopy`)
-  - `--no-deps`, and then iteratively figuring out dependencies, allows us to keep the bundled size down
+    - `--no-deps`, and then iteratively figuring out dependencies, allows us to keep the bundled size down
 4. Run the experiment to figure out missing dependencies
 5. Install pyinstaller (`pip install pyinstaller`)
 6. Generate an initial spec file (`pyinstaller <main>.py --onedir --noconsole`)
 7. Tweak the spec file
-  - e.g. set pathex to `[]`, make sure data files are included
+    - e.g. set pathex to `[]`, make sure data files are included
 8. Re-run pyinstaller (`pyinstaller <main>.spec --noconfirm`)
 9. Make sure the launcher (`Exp.cs`) has the name you want (and the paths in `Path.Combine` are correct)
 
