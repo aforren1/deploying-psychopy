@@ -114,7 +114,7 @@ if __name__ == '__main__':
     win.close()
 
     keys = block_data[0].keys()
-    # if we're using frozen, 
+    # if we're using frozen, save it at the same level as the launcher
     if __file__:
         pth = '..'
     else:

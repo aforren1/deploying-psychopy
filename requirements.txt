@@ -1,0 +1,9 @@
+pyglet==1.3.2 
+pillow 
+psychtoolbox 
+numpy 
+six 
+scipy 
+json_tricks 
+python-bidi 
+pandas
