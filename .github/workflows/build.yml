@@ -1,0 +1,28 @@
+name: Build
+
+on: [push]
+
+jobs:
+  build_exe:
+    name: Build exe on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest]
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - uses: actions/setup-python@v1
+      name: Install Python
+      with:
+        python-version: '3.7'
+    
+    - name: Build exe
+      run: |
+        build_win.bat
+        
+    - uses: actions/upload-artifact@v2
+      with:
+        name: executable
+        path: ./dist

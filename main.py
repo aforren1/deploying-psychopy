@@ -1,13 +1,13 @@
 import sys
 import os
+import os.path as op
 
 if getattr(sys, 'frozen', False):
-    app_path = os.path.dirname(sys.executable)
-elif __file__:
-    app_path = os.path.dirname(__file__)
+    app_path = sys._MEIPASS
+    frozen = True
 else:
-    raise ValueError('No idea if this is running as a script or under pyinstaller!')
-
+    app_path = op.dirname(op.abspath(__file__))
+    frozen = False
 
 if __name__ == '__main__':
     from psychopy import visual, event, core
@@ -25,11 +25,10 @@ if __name__ == '__main__':
     win = visual.Window(size=(800, 800), units='height')
 
     # import images
-    opj = os.path.join
-    img_path = opj(app_path, 'imgs')
+    img_path = op.join(app_path, 'imgs')
 
-    img_names = glob(opj(img_path, '*.jpeg'))
-    img_names.extend(glob(opj(img_path, '*.jpg')))
+    img_names = glob(op.join(img_path, '*.jpeg'))
+    img_names.extend(glob(op.join(img_path, '*.jpg')))
     
     imgs = []
     for img_name in img_names:
@@ -40,7 +39,7 @@ if __name__ == '__main__':
         img.resize((int(img.width*ratio), max_height))
         ratio2 = img.width/img.height
         img = visual.ImageStim(win, image=img, size=(0.4*ratio2, 0.4))
-        basename = os.path.basename(img_name)
+        basename = op.basename(img_name)
         if basename.startswith('a'):
             awake = True
         else:
@@ -114,12 +113,12 @@ if __name__ == '__main__':
     win.close()
 
     keys = block_data[0].keys()
-    # if we're using frozen, save it at the same level as the launcher
-    if __file__:
+    # if we're using the pyinstaller version, save it at the same level as the launcher
+    if frozen:
         pth = '..'
     else:
         pth = '.'
-    with open(opj(app_path, pth, 'data.csv'), 'w', newline='') as f:
+    with open(op.join(app_path, pth, 'data.csv'), 'w', newline='') as f:
         dict_writer = csv.DictWriter(f, keys)
         dict_writer.writeheader()
         dict_writer.writerows(block_data)

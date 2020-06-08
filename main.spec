@@ -3,7 +3,7 @@
 block_cipher = None
 
 data_files = [
-    ('imgs/*', 'imgs/')
+    ('imgs/', 'imgs/')
 ]
 
 a = Analysis(['main.py'],
@@ -28,13 +28,13 @@ exe = EXE(pyz,
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
-          upx=True,
+          upx=False,
           console=False )
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,
                a.datas,
                strip=False,
-               upx=True,
+               upx=False,
                upx_exclude=[],
                name='main')

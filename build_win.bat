@@ -1,14 +1,15 @@
 REM Make a fresh virtual environment
+rm -rf env
 python -m venv env
 call .\env\Scripts\activate.bat
 python -m pip install --upgrade pip
 
 REM Install dependencies (--no-deps + manual specification helps keep install size down)
-pip install --no-deps psychopy
-pip install -r requirements.txt
+python -m pip install --no-deps psychopy
+python -m pip install -r requirements.txt
 
 REM Use pre-baked spec file
-pip install pyinstaller
+python -m pip install pyinstaller
 pyinstaller main.spec
 
 REM Compile a launcher (so the user doesn't need to find the "real" executable)
