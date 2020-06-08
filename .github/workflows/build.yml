@@ -20,7 +20,8 @@ jobs:
     
     - name: Build exe
       run: |
-        build_win.bat
+        dir
+        ./build_win.bat
         
     - uses: actions/upload-artifact@v2
       with:
